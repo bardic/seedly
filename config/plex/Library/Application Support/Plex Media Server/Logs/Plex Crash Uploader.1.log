@@ -1,0 +1,4 @@
+Nov 28, 2022 23:49:08.675 [0x7f84a837eb38] INFO - Crash Uploader - Platform: Linux ServerUUID: 260b669e1a56bb54937adf6dbda6473f09f92b9a UserId: NOUSERID Version: 1.29.2.6364-6d72b0cf6
+Nov 28, 2022 23:49:08.675 [0x7f84a837eb38] DEBUG - Pre-processed minidump directory: /config/Library/Application Support/Plex Media Server/Crash Reports/1.29.2.6364-6d72b0cf6
+Nov 28, 2022 23:49:08.675 [0x7f84a837eb38] DEBUG - Post-processed minidump directory: /tmp
+Nov 28, 2022 23:49:08.643 [0x7f84aa023808] ERROR - Too many crashdumps detected / retries disallowed!

@@ -1,0 +1,65 @@
+version: '3'
+services:
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex-server
+    network_mode: host
+    env_file:
+      - "env/.env"
+      - "env/plex.env"
+    volumes:
+      - ./config/plex:/config
+      - ./data/plex/transcode:/transcode
+      - ./media/:/mdata
+    ports:
+      - 32400:32400
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    env_file:
+      - "env/.env"
+      - "env/sonarr.env"
+    volumes:
+      - ./config/sonarr:/config
+      - ./data/sonarr:/tv #optional
+      - ./media/tv:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    env_file:
+      - "env/.env"
+      - "env/radarr.env"
+    volumes:
+      - ./config/radarr:/config
+      - ./data/radarr:/movies #optional
+      - ./media/:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+
+  rtorrent-rutorrent:
+    image: crazymax/rtorrent-rutorrent:latest
+    ports:
+      - 6881:6881/udp
+      - 8080:8080
+      - 9000:9000
+      - 50000:50000
+    env_file:
+      - "env/.env"
+      - "env/rtorrent-rutorrent.env"
+    volumes:
+      - "./data:/data"
+      - "./media:/media"
+      - "./passwd:/passwd"
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 32000
+        hard: 40000
+    restart: always

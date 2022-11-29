@@ -1,0 +1,4 @@
+Nov 29, 2022 06:58:41.415 [0x7f174922fb38] INFO - Crash Uploader - Platform: Linux ServerUUID: 260b669e1a56bb54937adf6dbda6473f09f92b9a UserId: bardic.knowledge@gmail.com Version: 1.29.2.6364-6d72b0cf6
+Nov 29, 2022 06:58:41.429 [0x7f174922fb38] DEBUG - Pre-processed minidump directory: /config/Library/Application Support/Plex Media Server/Crash Reports/1.29.2.6364-6d72b0cf6
+Nov 29, 2022 06:58:41.445 [0x7f174922fb38] DEBUG - Post-processed minidump directory: /tmp
+Nov 29, 2022 06:58:41.365 [0x7f174aed4808] ERROR - Too many crashdumps detected / retries disallowed!
