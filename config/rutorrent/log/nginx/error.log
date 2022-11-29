@@ -1,2 +1,0 @@
-2022/11/29 03:12:13 [error] 393#393: *1 open() "/app/rutorrent/ruTorrent" failed (2: No such file or directory), client: 172.23.0.1, server: _, request: "GET /ruTorrent HTTP/1.1", host: "localhost"
-2022/11/29 03:12:13 [error] 393#393: *1 open() "/app/rutorrent/favicon.ico" failed (2: No such file or directory), client: 172.23.0.1, server: _, request: "GET /favicon.ico HTTP/1.1", host: "localhost", referrer: "http://localhost/ruTorrent"
