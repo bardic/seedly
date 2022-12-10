@@ -10,7 +10,8 @@ services:
     volumes:
       - ./config/plex:/config
       - ./data/plex/transcode:/transcode
-      - ./media/:/mdata
+      - ../media/tv:/mdata/tv
+      - ../media/movies:/mdata/movies
     ports:
       - 32400:32400
     restart: unless-stopped
@@ -23,8 +24,8 @@ services:
       - "env/sonarr.env"
     volumes:
       - ./config/sonarr:/config
-      - ./data/sonarr:/tv #optional
-      - ./media/tv:/downloads #optional
+      - ../media/tv:/tv #optional
+      - ../media/rtorrent/downloads:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -37,14 +38,15 @@ services:
       - "env/radarr.env"
     volumes:
       - ./config/radarr:/config
-      - ./data/radarr:/movies #optional
-      - ./media/:/downloads #optional
+      - ../media/movies:/movies #optional
+      - ../media/rtorrent/downloads:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
 
-  rtorrent-rutorrent:
+  rtorrent:
     image: crazymax/rtorrent-rutorrent:latest
+    container_name: rtorrent
     ports:
       - 6881:6881/udp
       - 8080:8080
@@ -55,7 +57,7 @@ services:
       - "env/rtorrent-rutorrent.env"
     volumes:
       - "./data:/data"
-      - "./media:/media"
+      - "../media/rtorrent/downloads:/downloads"
       - "./passwd:/passwd"
     ulimits:
       nproc: 65535
@@ -63,3 +65,14 @@ services:
         soft: 32000
         hard: 40000
     restart: always
+  muximux:
+    image: lscr.io/linuxserver/muximux:latest
+    container_name: muximux
+    env_file:
+      - "env/.env"
+      - "env/muximux.env"
+    volumes:
+      - ./config/muximux:/config
+    ports:
+      - 9090:80
+    restart: unless-stopped

@@ -1,4 +1,4 @@
-*.htpasswd
+**/*.htpasswd
 
 data/
 config/
