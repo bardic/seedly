@@ -9,8 +9,8 @@ services:
     volumes:
       - ./config/plex:/config
       - ./data/plex/transcode:/transcode
-      - /var/lib/docker/volumes/tv/_data:/mdata/tv
-      - /var/lib/docker/volumes/movies/_data:/mdata/movies
+      - /var/lib/docker/volumes/rtorrent/_data/complete/tv:/mdata/tv
+      - /var/lib/docker/volumes/rtorrent/_data/complete/movies:/mdata/movies
     ports:
       - 32400:32400
     restart: unless-stopped
@@ -22,7 +22,7 @@ services:
       - "stack.env"
     volumes:
       - ./config/sonarr:/config
-      - /var/lib/docker/volumes/tv/_data:/tv #optional
+      - /var/lib/docker/volumes/rtorrent/_data/complete/tv:/tv #optional
       - /var/lib/docker/volumes/rtorrent/_data:/downloads #optional
     ports:
       - 8989:8989
@@ -35,7 +35,7 @@ services:
       - "stack.env"
     volumes:
       - ./config/radarr:/config
-      - /var/lib/docker/volumes/movies/_data:/movies #optional
+      - /var/lib/docker/volumes/rtorrent/_data/complete/movies:/movies #optional
       - /var/lib/docker/volumes/rtorrent/_data:/downloads
     ports:
       - 7878:7878
