@@ -75,8 +75,8 @@ services:
 
 volumes:
   tv:
-    external: true
+    driver: local
   movies:
-    external: true
-   rtorrent:
-    external: true
+    driver: local
+  rtorrent:
+    driver: local
