@@ -23,7 +23,6 @@ services:
     volumes:
       - ./config/sonarr:/config
       - /media/downloads/complete/tv:/tv #optional
-      - /media/downloads:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -35,8 +34,7 @@ services:
       - "stack.env"
     volumes:
       - ./config/radarr:/config
-      - /media/downloads/complete/movies:/movies #optional
-      - /media/downloads:/downloads
+      - /media/downloads/complete/movies:/movies #optionals
     ports:
       - 7878:7878
     restart: unless-stopped
