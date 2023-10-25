@@ -72,3 +72,11 @@ services:
     ports:
       - 9090:80
     restart: unless-stopped
+
+volumes:
+  tv:
+    external: true
+  movies:
+    external: true
+   rtorrent:
+    external: true
