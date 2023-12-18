@@ -7,24 +7,24 @@ services:
     env_file:
       - "stack.env"
     volumes:
-      - ./config/plex:/config
-      - ./data/plex/transcode:/transcode
-      - /media/downloads/complete/tv:/mdata/tv
-      - /media/downloads/complete/movies:/mdata/movies
+      - "/mnt/media/config/plex:/config"
+      - "/mnt/media/data/plex/transcode:/transcode"
+      - "/mnt/media/library/complete/tv:/mdata/tv"
+      - "/mnt/media/library/complete/movies:/mdata/movies"
     ports:
       - 32400:32400
     restart: unless-stopped
 
   sonarr:
-    image: lscr.io/linuxserver/sonarr:latest
-    container_name: sonarr
+    image: lscr.io/linuxserver/sickchill:latest
+    container_name: sickchill
     env_file:
       - "stack.env"
     volumes:
-      - ./config/sonarr:/config
-      - /media/downloads/complete/tv:/tv #optional
+      - "/mnt/media/config/sonarr:/config"
+      - "/mnt/media/library/tv:/tv"
     ports:
-      - 8989:8989
+      - 8081:8081
     restart: unless-stopped
 
   radarr:
@@ -33,8 +33,8 @@ services:
     env_file:
       - "stack.env"
     volumes:
-      - ./config/radarr:/config
-      - /media/downloads/complete/movies:/movies #optionals
+      - "/mnt/media/config/radarr:/config"
+      - "/mnt/media/library/movies:/movies"
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -50,23 +50,11 @@ services:
     env_file:
       - "stack.env"
     volumes:
-      - "./data:/data"
-      - "/media/downloads:/downloads"
-      - "./passwd:/passwd"
+      - "/mnt/media/data/rtorrent:/data"
+      - "/mnt/media/downloads:/downloads"
     ulimits:
       nproc: 65535
       nofile:
         soft: 32000
         hard: 40000
     restart: always
-
-  muximux:
-    image: lscr.io/linuxserver/muximux:latest
-    container_name: muximux
-    env_file:
-      - "stack.env"
-    volumes:
-      - ./config/muximux:/config
-    ports:
-      - 9090:80
-    restart: unless-stopped
