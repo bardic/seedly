@@ -4,8 +4,6 @@ services:
     image: plexinc/pms-docker:latest
     container_name: plex-server
     network_mode: host
-    env_file:
-      - "stack.env"
     volumes:
       - "/mnt/media/config/plex:/config"
       - "/mnt/media/data/plex/transcode:/transcode"
@@ -18,8 +16,6 @@ services:
   sonarr:
     image: lscr.io/linuxserver/sickchill:latest
     container_name: sickchill
-    env_file:
-      - "stack.env"
     volumes:
       - "/mnt/media/config/sonarr:/config"
       - "/mnt/media/library/tv:/tv"
@@ -30,8 +26,6 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
-    env_file:
-      - "stack.env"
     volumes:
       - "/mnt/media/config/radarr:/config"
       - "/mnt/media/library/movies:/movies"
@@ -47,8 +41,6 @@ services:
       - 8080:8080
       - 9000:9000
       - 50000:50000
-    env_file:
-      - "stack.env"
     volumes:
       - "/mnt/media/data/rtorrent:/data"
       - "/mnt/media/downloads:/downloads"
