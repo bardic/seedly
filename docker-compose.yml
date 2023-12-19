@@ -13,7 +13,7 @@ services:
       - 32400:32400
     restart: unless-stopped
 
-  sonarr:
+  sickchill:
     image: lscr.io/linuxserver/sickchill:latest
     container_name: sickchill
     volumes:
@@ -27,7 +27,7 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     volumes:
-      - "/mnt/media/config/radarr:/config"
+      - "/mnt/media/downloads/complete:/complete"
       - "/mnt/media/library/movies:/movies"
     ports:
       - 7878:7878
