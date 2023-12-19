@@ -17,7 +17,7 @@ services:
     image: lscr.io/linuxserver/sickchill:latest
     container_name: sickchill
     volumes:
-      - "/mnt/media/config/sonarr:/config"
+      - "/mnt/media/downloads/complete:/complete"
       - "/mnt/media/library/tv:/tv"
     ports:
       - 8081:8081
@@ -27,7 +27,7 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     volumes:
-      - "/mnt/media/downloads/complete:/complete"
+      - "/mnt/media/config/radarr:/config"
       - "/mnt/media/library/movies:/movies"
     ports:
       - 7878:7878
