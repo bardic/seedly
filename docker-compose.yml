@@ -3,7 +3,6 @@ services:
   plex:
     image: plexinc/pms-docker:latest
     container_name: plex-server
-    network_mode: host
     volumes:
       - "/mnt/media/config/plex:/config"
       - "/mnt/media/data/plex/transcode:/transcode"
