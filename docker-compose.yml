@@ -15,6 +15,10 @@ services:
   sickchill:
     image: lscr.io/linuxserver/sickchill:latest
     container_name: sickchill
+    environment:
+    - PUID=1000
+    - PGID=1000
+    - TZ=America/Halifax
     volumes:
       - "/mnt/media/downloads:/downloads"
       - "/mnt/media/library/tv:/tv"
