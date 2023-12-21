@@ -6,8 +6,8 @@ services:
     volumes:
       - "/mnt/media/config/plex:/config"
       - "/mnt/media/data/plex/transcode:/transcode"
-      - "/mnt/media/library/complete/tv:/mdata/tv"
-      - "/mnt/media/library/complete/movies:/mdata/movies"
+      - "/mnt/media/library/tv:/mdata/tv"
+      - "/mnt/media/library/movies:/mdata/movies"
     ports:
       - 32400:32400
     restart: unless-stopped
