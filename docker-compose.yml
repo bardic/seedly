@@ -16,7 +16,7 @@ services:
     image: lscr.io/linuxserver/sickchill:latest
     container_name: sickchill
     volumes:
-      - "/mnt/media/downloads/complete:/complete"
+      - "/mnt/media/downloads:/downloads"
       - "/mnt/media/library/tv:/tv"
     ports:
       - 8081:8081
