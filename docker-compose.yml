@@ -1,13 +1,17 @@
 version: '3'
 services:
   plex:
-    image: plexinc/pms-docker:latest
-    container_name: plex-server
+    image: linuxserver/plex
+    container_name: plex
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Halifax
+      - VERSION=docker
     volumes:
-      - "/mnt/media/config/plex:/config"
-      - "/mnt/media/data/plex/transcode:/transcode"
-      - "/mnt/media/library/tv:/mdata/tv"
-      - "/mnt/media/library/movies:/mdata/movies"
+      - /mnt/media/plex/:/config
+      - /mnt/media/library/tv:/tv
+      - /mnt/media/library/movies:/movies
     ports:
       - 32400:32400
     restart: unless-stopped
