@@ -1,15 +1,16 @@
 version: '3'
 services:
   plex:
-    image: linuxserver/plex
+    image: plexinc/pms-docker:latest
     container_name: plex
+    network: host 
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=America/Halifax
-      - VERSION=docker
+      - PLEX_CLAIM='claim-PRgc6yysi3qxfFxARuos'
     volumes:
-      - /mnt/media/plex/:/config
+      - /mnt/media/plex/config:/config
+      - /mnt/media/plex/data:/data
+      - /mnt/media/plex/transcode/temp:/transcode
       - /mnt/media/library/tv:/tv
       - /mnt/media/library/movies:/movies
     ports:
