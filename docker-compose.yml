@@ -1,28 +1,13 @@
 version: '3'
 services:
-  plex:
-    image: lscr.io/linuxserver/plex:latest
-    container_name: plex
-    network_mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - VERSION=docker
-      - PLEX_CLAIM= claim-3h2rpVN79m_3o8knyAUj
-    volumes:
-      - /mnt/media/plex/library:/config
-      - /mnt/media/library/tv:/tv
-      - /mnt/media/library/movies:/movies
-    restart: unless-stopped
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
     user: 1000:1000
     volumes:
-      - /mnt/media/jellyfin/config:/config
-      - /mnt/media/library/tv:/tv
-      - /mnt/media/library/movies:/movies
+      - /media/jellyfin/config:/config
+      - /media/library/tv:/tv
+      - /media/library/movies:/movies
     ports:
       - 8096:8096
     restart: unless-stopped
@@ -35,8 +20,8 @@ services:
     - PGID=1000
     - TZ=America/Halifax
     volumes:
-      - "/mnt/media/downloads:/downloads"
-      - "/mnt/media/library/tv:/tv"
+      - "/media/downloads:/downloads"
+      - "/media/library/tv:/tv"
     ports:
       - 8081:8081
     restart: unless-stopped
@@ -45,8 +30,8 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     volumes:
-      - "/mnt/media/config/radarr:/config"
-      - "/mnt/media/library/movies:/movies"
+      - "/media/config/radarr:/config"
+      - "/media/library/movies:/movies"
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -60,8 +45,8 @@ services:
       - 9000:9000
       - 50000:50000
     volumes:
-      - "/mnt/media/data/rtorrent:/data"
-      - "/mnt/media/downloads:/downloads"
+      - "/media/data/rtorrent:/data"
+      - "/media/downloads:/downloads"
     ulimits:
       nproc: 65535
       nofile:
