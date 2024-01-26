@@ -3,7 +3,7 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
-    user: 1005:1000
+    user: 1005:1005
     volumes:
       - /media/jellyfin/config:/config
       - /media/library/tv:/tv
@@ -29,6 +29,10 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
+    environment:
+    - PUID=1005
+    - PGID=1005
+    - TZ=America/Halifax
     volumes:
       - "/media/config/radarr:/config"
       - "/media/library/movies:/movies"
@@ -39,6 +43,9 @@ services:
   rtorrent:
     image: crazymax/rtorrent-rutorrent:latest
     container_name: rtorrent
+    environment:
+    - PUID=1005
+    - PGID=1005
     ports:
       - 6881:6881/udp
       - 8080:8080
