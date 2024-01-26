@@ -7,7 +7,8 @@ services:
     volumes:
       - /media/jellyfin/config:/config
       - /media/library/tv:/tv
-      - /media/library/movies:/movies
+      - /media/downloads/complete/movies:/movies
+      - /media/downloads/complete/radarr:/radarr_movies
     ports:
       - 8096:8096
     restart: unless-stopped
@@ -35,8 +36,8 @@ services:
     - TZ=America/Halifax
     volumes:
       - "/media/config/radarr:/config"
-      - "/media/downloads/complete/movies:/movies"
-      - "/media/downloads/complete/radarr:/radarr_movies"
+      - "/media/library/movies:/movies"
+      - "/media/downloads/complete/radarr:/media/downloads/complete/radarr"
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -44,6 +45,9 @@ services:
   rtorrent:
     image: crazymax/rtorrent-rutorrent:latest
     container_name: rtorrent
+    environment:
+    - PUID=1005
+    - PGID=1005
     ports:
       - 6881:6881/udp
       - 8080:8080
