@@ -43,9 +43,6 @@ services:
   rtorrent:
     image: crazymax/rtorrent-rutorrent:latest
     container_name: rtorrent
-    environment:
-    - PUID=1005
-    - PGID=1005
     ports:
       - 6881:6881/udp
       - 8080:8080
