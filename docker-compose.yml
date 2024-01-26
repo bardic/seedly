@@ -35,7 +35,8 @@ services:
     - TZ=America/Halifax
     volumes:
       - "/media/config/radarr:/config"
-      - "/media/library/movies:/movies"
+      - "/media/downloads/movies:/movies"
+      - "/media/downloads/radarr:/radarr_movies"
     ports:
       - 7878:7878
     restart: unless-stopped
