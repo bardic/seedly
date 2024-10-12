@@ -40,6 +40,8 @@ services:
     environment: *env
     volumes:
       - /Media/radarr:/config
+      - /Media/library/movies:/movies #optional
+      - /Media/downloads:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
