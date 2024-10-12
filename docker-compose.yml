@@ -27,7 +27,7 @@ services:
     - PGID=1000
     - TZ=America/Halifax
     volumes:
-      - /Media/downloads:/downloads
+      - /Media/downloads/tv:/downloads
       - /Media/library/tv:/tv
     ports:
       - 8081:8081
@@ -41,7 +41,7 @@ services:
     volumes:
       - /Media/radarr:/config
       - /Media/library/movies:/movies #optional
-      - /Media/downloads:/downloads #optional
+      - /Media/downloads/movies:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
