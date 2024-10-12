@@ -1,14 +1,19 @@
 version: '3'
+
 services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
-    user: 1005:1005
+    user: 1000:1000
+    environment: &env
+    - PUID=1000
+    - PGID=1000
+    - TZ=America/Halifax
     volumes:
-      - /media/jellyfin/config:/config
-      - /media/library/tv:/tv
-      - /media/downloads/complete/movies:/movies
-      - /media/downloads/complete/radarr:/radarr_movies
+      - /Media/jellyfin/config:/config
+      - /Media/jellyfin/cache:/cache
+      - /Media/library/tv:/tv
+      - /Media/library/movies:/movies
     ports:
       - 8096:8096
     restart: unless-stopped
@@ -16,13 +21,13 @@ services:
   sickchill:
     image: lscr.io/linuxserver/sickchill:latest
     container_name: sickchill
-    environment:
-    - PUID=1005
-    - PGID=1005
+    environment: &env
+    - PUID=1000
+    - PGID=1000
     - TZ=America/Halifax
     volumes:
-      - "/media/downloads:/downloads"
-      - "/media/library/tv:/tv"
+      - /Media/downloads:/downloads
+      - /Media/library/tv:/tv
     ports:
       - 8081:8081
     restart: unless-stopped
@@ -30,14 +35,9 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
-    environment:
-    - PUID=1005
-    - PGID=1005
-    - TZ=America/Halifax
+    environment: *env
     volumes:
-      - "/media/config/radarr:/config"
-      - "/media/library/movies:/movies"
-      - "/media/downloads/complete/radarr:/media/downloads/complete/radarr"
+      - /Media/radarr:/config
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -45,20 +45,18 @@ services:
   rtorrent:
     image: crazymax/rtorrent-rutorrent:latest
     container_name: rtorrent
-    environment:
-    - PUID=1005
-    - PGID=1005
+    environment: *env
     ports:
       - 6881:6881/udp
       - 8080:8080
       - 9000:9000
       - 50000:50000
     volumes:
-      - "/media/data/rtorrent:/data"
-      - "/media/downloads:/downloads"
+      - /Media/rtorrent:/data
+      - /Media/downloads:/downloads
     ulimits:
       nproc: 65535
       nofile:
         soft: 32000
         hard: 40000
-    restart: always
+    restart: unless-stopped
