@@ -12,7 +12,6 @@ services:
         - GIDLIST=100 # A comma-separated list of additional GIDs to run emby as (default: 2)
         - TZ=America/Halifax
     volumes:
-    volumes:
         - /Media/emby/config:/config
         - /Media/library/tv:/tv
         - /Media/library/movies:/movies
