@@ -1,22 +1,19 @@
 services:
-  emby:
-    image: emby/embyserver
-    container_name: embyserver
-    network_mode: host # Enable DLNA and Wake-on-Lan
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
     environment:
-        - UID=1000 # The UID to run emby as (default: 2)
-        - GID=100 # The GID to run emby as (default 2)
-        - GIDLIST=100 # A comma-separated list of additional GIDs to run emby as (default: 2)
-        - TZ=America/Halifax
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/***
+      - VERSION=docker
+      - PLEX_CLAIM=****
     volumes:
-        - /Media/emby/config:/config
-        - /Media/library/tv:/tv
-        - /Media/library/movies:/movies
-    ports:
-        - 8096:8096 # HTTP port
-        - 8920:8920 # HTTPS port
-    restart: on-failure
-
+      - /media/seedly/config/plex/config:/config
+      - /media/seedly/library/tv:/tv
+      - /media/seedly/library/movies:/movies
+    restart: unless-stopped
   sickchill:
     image: lscr.io/linuxserver/sickchill:latest
     container_name: sickchill
@@ -25,25 +22,23 @@ services:
     - PGID=1000
     - TZ=America/Halifax
     volumes:
-      - /Media/downloads/tv:/downloads
-      - /Media/library/tv:/tv
+      - /media/seedly/downloads/complete/tv:/downloads
+      - /media/seedly/library/tv:/tv
     ports:
-      - 8081:8081
+      - 8082:8081
     restart: unless-stopped
-    network_mode: host
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment: *env
     volumes:
-      - /Media/radarr:/config
-      - /Media/library/movies:/movies #optional
-      - /Media/downloads/movies:/downloads #optional
+      - /media/seedly/config/radarr:/config
+      - /media/seedly/library/movies:/movies #optional
+      - /media/seedly/downloads/complete/movies:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
-    network_mode: host
 
   rtorrent:
     image: crazymax/rtorrent-rutorrent:latest
@@ -56,12 +51,11 @@ services:
       - 9000:9000
       - 50000:50000
     volumes:
-      - /Media/rtorrent:/data
-      - /Media/downloads:/downloads
+      - /media/seedly/rtorrent:/data
+      - /media/seedly/downloads:/downloads
     ulimits:
       nproc: 65535
       nofile:
         soft: 32000
         hard: 40000
     restart: unless-stopped
-    network_mode: host
