@@ -2,11 +2,15 @@
 
 Media Stack
 
-- jellyfin
+- plex
 - sickchill
 - radarr
 - rtorrent
 
 ## Assumptions
 
-All media ia stored in `/media`
+media root is `/media/seedly/`
+
+## rutorrent connection 
+
+to have sickchill/radarr connect properly to rutorrent the address is `http://IP-ADDRESS-HERE:8080/plugins/httprpc/action.php`
