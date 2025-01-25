@@ -12,7 +12,7 @@ services:
     volumes:
       - /media/seedly/config/plex/config:/config
       - /media/seedly/library/tv:/tv
-      - /media/seedly/library/movies:/movies
+      - /media/seedly/downloads/complete/movies:/movies
     restart: unless-stopped
   sickchill:
     image: lscr.io/linuxserver/sickchill:latest
@@ -27,7 +27,6 @@ services:
     ports:
       - 8082:8081
     restart: unless-stopped
-
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
@@ -39,7 +38,6 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
-
   rtorrent:
     image: crazymax/rtorrent-rutorrent:latest
     container_name: rtorrent
@@ -59,3 +57,9 @@ services:
         soft: 32000
         hard: 40000
     restart: unless-stopped
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+    command: --interval 30
